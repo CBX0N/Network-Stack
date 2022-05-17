@@ -8,6 +8,7 @@ services:
       - "80:80/tcp"
     environment:
       TZ: 'America/Chicago'
+      DNS: 127.0.0.1
     volumes:
       - '/network-stack/conf/pihole:/etc/pihole'
       - '/network-stack/conf/dnsmasq:/etc/dnsmasq.d'
