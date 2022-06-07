@@ -1,2 +1,19 @@
 services:
-  
+  reverse-proxy:
+    image: traefik:2.7
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /opt/docker/volumes/network-stack/traefik.yml:/etc/traefik/traefik.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.cbxon.co.uk`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+      
